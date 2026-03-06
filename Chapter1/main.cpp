@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int status[4] = { 0 }; // 캐릭터 스탯 배열
+int status[5] = { 0 }; // 캐릭터 스탯 배열
 void setPotion(int count, int* p_HPPotion, int* p_MPPotion);
 
 int main()
@@ -31,22 +31,24 @@ int main()
         cin >> status[1];
     }
 
-    cout << "공격력과 방어력을 입력해주세요." << endl;
+    cout << "공격력, 방어력과 민첩성을 입력해주세요." << endl;
     cin >> status[2];
     cin >> status[3];
+    cin >> status[4];
 
-    while (status[2] <= 0 || status[3] <= 0)
+    while (status[2] <= 0 || status[3] <= 0 || status[4] <= 0)
     {
-        cout << "공격력과 방어력의 값이 너무 작습니다. 다시 입력해주세요." << endl;
+        cout << "공격력, 방어력과 민첩성의 값이 너무 작습니다. 다시 입력해주세요." << endl;
         cin >> status[2];
         cin >> status[3];
+        cin >> status[4];
     }
 
 
     while(ch != 0)
     {
         
-        cout << "1.HP UP / 2.MP UP / 3.공격력 UP / 4.방어력 UP / 5.현재 능력치 / 6.Level Up / 0.나가기" << endl;
+        cout << "1.HP UP / 2.MP UP / 3.공격력 UP / 4.방어력 UP / 5. 민첩성 UP / 6. 현재 능력치 / 7.Level Up / 0.나가기" << endl;
 
         cin >> ch;
 
@@ -65,7 +67,11 @@ int main()
                 status[3] *= 2;
                 break;
             case 5:
-                cout << "현재 HP / MP / 공격력 / 방어력 : " << ends;
+                status[4] *= 2;
+                break;
+            case 6:
+                cout << "현재 레벨 / HP / MP / 공격력 / 방어력 / 민첩성: " << ends;
+                cout << level << " / ";
                 for (int i = 0; i < sizeof(status)/sizeof(int); i++) 
                 {
                     cout << status[i] << ends;
@@ -73,9 +79,13 @@ int main()
                      cout << " / " << ends; 
                 }
                 cout << endl;
+                cout << "남은 포션 개수 - HP 포션: " << HPPotion << "개, MP 포션: " << MPPotion << "개" << endl;
                 break;
-            case 6:
+            case 7:
                 setPotion(ch, p_HPPotion, p_MPPotion);
+                status[2] += 2;
+                status[3] += 2;
+                status[4] += 2;
                 cout << "현재 레벨 : " << ++level << endl;
                 break;
             case 0:
